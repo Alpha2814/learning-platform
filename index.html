@@ -3,37 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning Platform</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <meta name="description" content="Advanced HTML page for GitHub Learning Platform with Voice Search">
+    <meta name="author" content="Your Name">
+    <title>GitHub Learning Platform - Voice Search</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional external stylesheet for custom styles -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for dynamic features -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .search-bar {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .search-button, .voice-button {
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .voice-button {
+            background-color: #17a2b8;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            margin-top: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+
     <header>
-        <h1>Welcome to the Learning Platform</h1>
-        <p>Learn at your own pace with our interactive courses!</p>
+        <h1>GitHub Learning Platform</h1>
+        <p>Explore and Learn from Wikipedia</p>
     </header>
 
-    <nav>
-        <button id="homeBtn">Home</button>
-        <button id="coursesBtn">Courses</button>
-        <button id="aboutBtn">About</button>
-    </nav>
+    <div class="container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search Wikipedia...">
+        <button class="search-button" id="searchButton">Search</button>
+        <button class="voice-button" id="voiceButton">🎤 Voice Search</button>
+    </div>
 
-    <section id="content">
-        <h2>Home</h2>
-        <p>Click on any of the buttons above to learn more about each section!</p>
-    </section>
-
-    <section id="voice-controls">
-        <h3>Voice Command Features</h3>
-        <p>Say "Go to Courses", "Show About", or "Show Home" to navigate!</p>
-        <button id="startVoiceBtn">Start Voice Commands</button>
-        <p id="voiceFeedback">Voice command feedback will appear here.</p>
-    </section>
+    <div class="container">
+        <h2>Wikipedia Reference</h2>
+        <iframe id="wikipediaIframe" src="https://en.wikipedia.org/wiki/Main_Page"></iframe>
+    </div>
 
     <footer>
-        <p>Learning Platform &copy; 2025</p>
+        <p>Made with ❤️ by Your Name | GitHub Learning Platform</p>
     </footer>
 
-</body>
-</html>
+    <script>
+        // jQuery for handling search functionality
+        $(document).ready(function() {
+            $('#searchButton').click(function() {
+                var searchQuery = $('#searchInput').val();
+                if (searchQuery) {
+                    var url = 'https://en.wikipedia.org/wiki/' + encodeURIComponent(searchQuery);
+                    $('#wikipediaIframe').attr('src', url);
+                } else {
+                    alert("Please enter a search term.");
+                }
+            });
+
+            // Voice recognition functionality using Web Speech API
+            const voiceButton = document.getElementById('voiceButton');
+            const searchInput = document.getElementById('searchInput');
+
+            // Check if the browser supports SpeechRecognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognition) {
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.cont
